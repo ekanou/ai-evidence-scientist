@@ -1,14 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ph from '../components/Ph.astro';
-import { WORKSHOP_NAME, YEAR, SHOW_PROJECTS } from '../config';
+import { WORKSHOP_NAME, YEAR, SHOW_PROJECTS, APPLICATIONS, applicationMailto } from '../config';
 import { href } from '../lib/url';
 
 const toc = [
   { id: 'who', label: 'Who should apply' },
   { id: 'funding', label: 'Remuneration' },
   { id: 'how', label: 'How to apply' },
-  { id: 'deadline', label: 'Deadline and decisions' },
+  { id: 'decisions', label: 'Decisions' },
 ];
 ---
 <BaseLayout
@@ -26,7 +26,7 @@ const toc = [
   <dl class="facts">
     <div><dt>Dates</dt><dd><Ph k="DATES" /></dd></div>
     <div><dt>Location</dt><dd><Ph k="LOCATION" /></dd></div>
-    <div><dt>Final deadline</dt><dd><Ph k="DEADLINE" /></dd></div>
+    <div><dt>Applications</dt><dd>{APPLICATIONS}</dd></div>
   </dl>
 
   <section aria-labelledby="who">
@@ -65,12 +65,17 @@ const toc = [
       what draws you to the problem, what you would bring to it, and whether you would take the work as your
       Project AI or your MSc thesis.
     </p>
+    {applicationMailto() && (
+      <p class="actions">
+        <a class="button" href={applicationMailto()}>Email your application</a>
+      </p>
+    )}
   </section>
 
-  <section aria-labelledby="deadline">
-    <h2 id="deadline">Deadline and decisions</h2>
+  <section aria-labelledby="decisions">
+    <h2 id="decisions">Decisions</h2>
     <p>
-      Final deadline <Ph k="DEADLINE" />. Decisions are made on a rolling basis, so apply early.
+      There is no deadline. Applications are reviewed on a rolling basis, so apply early.
     </p>
   </section>
 </BaseLayout>
@@ -102,5 +107,9 @@ const toc = [
 
   .facts dd {
     margin: 0;
+  }
+
+  .actions {
+    margin-top: var(--space-4);
   }
 </style>

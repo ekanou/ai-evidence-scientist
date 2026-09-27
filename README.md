@@ -17,7 +17,7 @@ Set `STRICT_PLACEHOLDERS=1` to make the build fail while any placeholder is unfi
 
 ## Filling in placeholders
 
-All unconfirmed facts are in `src/config.ts`: name, year, dates, location, host, contact email, deadline, funding, partners and organisers.
+All unconfirmed facts are in `src/config.ts`: name, year, dates, location, host, contact emails, funding, partners and organisers.
 Set `value` and change `confirmed: true`. The dev outline and the build warning then disappear.
 The TREC paragraph stays "proposed" until `TREC_TRACK_ACCEPTED` is `true`, and the build fails if the wording drops "proposed" before then.
 

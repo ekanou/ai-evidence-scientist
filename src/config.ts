@@ -32,8 +32,12 @@ export const placeholders = {
   DATES: p(null, false, 'Dates to be announced', 'Workshop dates, e.g. "8 June – 14 August 2027".'),
   LOCATION: p('University of Amsterdam, Amsterdam', false, 'Location to be announced', 'Inferred from the host; confirm the building or venue.'),
   HOST_INSTITUTION: p('University of Amsterdam', true, 'Host institution to be announced', 'Host institution name.'),
-  CONTACT_EMAIL: p(null, false, 'the organisers (address to be announced)', 'Public contact address for applications and questions.'),
-  DEADLINE: p(null, false, 'to be announced', 'Final application deadline, e.g. "15 February 2027".'),
+  CONTACT_EMAIL: p<string[]>(
+    ['e.kanoulas@uva.nl', 'j.qiao@uva.nl'],
+    true,
+    'the organisers (address to be announced)',
+    'Addresses applications go to (Evangelos Kanoulas and Jingfen Qiao).',
+  ),
   FUNDING_DETAILS: p(
     'Participants are appointed as interns and receive a light remuneration.',
     true,
@@ -75,6 +79,17 @@ export function unresolved(): { key: PlaceholderKey; state: 'missing' | 'unconfi
 
 export const WORKSHOP_NAME = text('WORKSHOP_NAME');
 export const YEAR = Number(placeholders.YEAR.value);
+
+/** Applications are rolling; there is no deadline (owner decision 2026-09-27). */
+export const APPLICATIONS = 'Rolling, no deadline';
+
+/** mailto: link that addresses an application to every contact at once. */
+export function applicationMailto(): string | null {
+  const to = placeholders.CONTACT_EMAIL.value;
+  if (!to?.length) return null;
+  const subject = encodeURIComponent(`Application: ${WORKSHOP_NAME} ${YEAR}`);
+  return `mailto:${to.join(',')}?subject=${subject}`;
+}
 
 /** Known and confirmed by the brief (CLAUDE.md §1). */
 export const PROJECT_LEAD = {

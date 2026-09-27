@@ -2,7 +2,7 @@
 /**
  * Renders a placeholder value from src/config.ts.
  * In `astro dev`, unconfirmed values get a dashed outline and their key.
- * `as="email"` renders a mailto link once CONTACT_EMAIL is filled.
+ * `as="email"` renders mailto links once the value is filled (a list becomes "a and b").
  */
 import { placeholders, text, type PlaceholderKey } from '../config';
 
@@ -15,10 +15,18 @@ const { k, as = 'text' } = Astro.props;
 const ph = placeholders[k];
 const value = text(k);
 const flag = import.meta.env.DEV && !ph.confirmed;
-const isEmail = as === 'email' && ph.value !== null;
+const emails: string[] | null =
+  as === 'email' && ph.value !== null ? (Array.isArray(ph.value) ? ph.value : [String(ph.value)]) : null;
 ---
-{isEmail ? (
-  <a class="ph" href={`mailto:${value}`} data-key={k} data-dev={flag ? '' : undefined}>{value}</a>
+{emails ? (
+  <span class="ph" data-key={k} data-dev={flag ? '' : undefined}>
+    {emails.map((e, i) => (
+      <>
+        {i > 0 && (i === emails.length - 1 ? ' and ' : ', ')}
+        <a href={`mailto:${e}`}>{e}</a>
+      </>
+    ))}
+  </span>
 ) : flag ? (
   <span class="ph" data-key={k} data-dev="">{value}</span>
 ) : (
