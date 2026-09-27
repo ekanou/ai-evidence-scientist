@@ -12,4 +12,4 @@ background: NLP, information extraction
 
 **As a thesis.** Use span-level evidence to route uncertain decisions to a human; see [Spending human effort well](#spending-human-effort-well).
 
-**Starting data.** Reviews that list included and excluded full texts with reasons for exclusion.
+**Starting data.** [CSMeD-FT](https://github.com/WojciechKusa/systematic-review-datasets) has 3,333 full-text eligibility decisions from 213 Cochrane reviews, each exclusion with a free-text reason. [Evidence Inference 2.0](https://github.com/jayded/evidence-inference) has full-text trials where doctors marked the evidence behind each finding, often with two or more annotators. No dataset gives gold evidence for each eligibility criterion, so expect a small annotation effort.

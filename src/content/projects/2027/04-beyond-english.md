@@ -12,4 +12,4 @@ background: Multilingual NLP, machine translation
 
 **As a thesis.** Multilingual extraction from full texts, and how translation errors propagate into eligibility decisions and extracted data.
 
-**Starting data.** Reviews that included non-English studies. Language bias is a known threat to review validity ([Higgins et al., 2024](#ref-cochrane-handbook)).
+**Starting data.** Few collections label non-English studies. [Cohen et al.'s drug-class reviews](https://dmice.ohsu.edu/cohenaa/systematic-drug-class-review-data.html) are the exception, with an explicit foreign-language exclusion code. Otherwise, derive language from PubMed and OpenAlex metadata. [TrialPanorama](https://huggingface.co/datasets/TrialPanorama/TrialPanorama-database) covers 15 trial registries, including Chinese and European ones. Language bias is a known threat to review validity ([Higgins et al., 2024](#ref-cochrane-handbook)).

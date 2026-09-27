@@ -12,4 +12,4 @@ background: Information retrieval, active learning, human–computer interaction
 
 **As a thesis.** Routing policies that decide in real time, and a study with reviewers to test the simulation's assumptions.
 
-**Starting data.** Existing technology-assisted review collections, and eligibility decisions from [Eligibility decisions with evidence](#eligibility-decisions-with-evidence).
+**Starting data.** For simulation: the CLEF TAR collections ([Kanoulas et al., 2017](#ref-kanoulas-2017), [2018](#ref-kanoulas-2018), [2019](#ref-kanoulas-2019)), [CSMeD](https://github.com/WojciechKusa/systematic-review-datasets), [SYNERGY](https://github.com/asreview/synergy-dataset) and [Chan et al.'s](https://data.mendeley.com/datasets/7sgmg89zb6/1) 8,608 Cochrane reviews. Eligibility decisions come from [Eligibility decisions with evidence](#eligibility-decisions-with-evidence). No public data records reviewers' time per record, so human effort is simulated.

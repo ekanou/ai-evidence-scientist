@@ -12,4 +12,4 @@ background: Software engineering, LLM agents
 
 **As a thesis.** Use the logs to find where runs go wrong, and compare agents on their process as well as their conclusions.
 
-**Starting data.** The protocol of any published review. Most agent projects build on this harness.
+**Starting data.** The protocol of any published review. No public dataset releases agent trajectories for medical reviews, so the log format fills a gap. For tasks to run the baseline agent on, [MetaSyn](https://huggingface.co/datasets/THUIR/MetaSyn) gives 422 meta-analyses with protocol, included studies and conclusion, plus a shared PubMed corpus. Most agent projects build on this harness.

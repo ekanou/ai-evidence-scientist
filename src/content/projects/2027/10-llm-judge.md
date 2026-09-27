@@ -12,4 +12,4 @@ background: NLP, evaluation methodology
 
 **As a thesis.** Study where judge and experts disagree, and design judges that fluent but wrong syntheses cannot fool.
 
-**Starting data.** Syntheses written by baseline agents, and methodologist judgments collected during the workshop.
+**Starting data.** Human judgments of generated review summaries from [Wang et al. (2023)](https://github.com/allenai/mslr-annotated-dataset), for pre-LLM systems, and [Shaib et al. (2023)](https://github.com/cshaib/summarizing-medical-evidence), for GPT-3. Reference conclusions come from [MedEvidence](https://huggingface.co/datasets/clcp/med-evidence) and [MedReview](https://github.com/ebmlab/MedReview). No public dataset rates modern LLM syntheses, so methodologist judgments will be collected during the workshop.

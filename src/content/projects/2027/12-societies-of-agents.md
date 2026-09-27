@@ -12,4 +12,4 @@ background: LLM agents, machine learning
 
 **As a thesis.** Measure correlated errors between agents, and find out when a mix of models is worth its cost.
 
-**Starting data.** The harness and logs from [An open action log and a baseline agent](#an-open-action-log-and-a-baseline-agent).
+**Starting data.** The harness and logs from [An open action log and a baseline agent](#an-open-action-log-and-a-baseline-agent). Tasks come from [MetaSyn](https://huggingface.co/datasets/THUIR/MetaSyn), [TrialReviewBench](https://huggingface.co/datasets/zifeng-ai/TrialReviewBench) and [TrialPanorama](https://huggingface.co/datasets/zifeng-ai/TrialPanorama-benchmark).

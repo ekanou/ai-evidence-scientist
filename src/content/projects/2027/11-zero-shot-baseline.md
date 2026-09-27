@@ -12,4 +12,4 @@ background: NLP, LLM evaluation
 
 **As a thesis.** Probe models for memorisation of specific reviews, and make the baseline robust across model families.
 
-**Starting data.** Review/update pairs from [Frozen collections and review/update pairs](#frozen-collections-and-reviewupdate-pairs), with older reviews as a contrast set.
+**Starting data.** [MEDAL](https://huggingface.co/datasets/cwang271/MEDAL), about 8,500 Cochrane-derived questions up to 2025; [MedReview](https://github.com/ebmlab/MedReview), with test splits before and after a training cutoff; and [MedRevQA and MedChangeQA](https://github.com/jvladika/MedChange), with dated questions and conclusions that changed between review versions. Later, use the review/update pairs from [Frozen collections and review/update pairs](#frozen-collections-and-reviewupdate-pairs).
