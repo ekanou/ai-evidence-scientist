@@ -8,7 +8,7 @@ import serifLatin from '@fontsource-variable/source-serif-4/files/source-serif-4
 import Mark from '../components/Mark.astro';
 import EditionNav from '../components/EditionNav.astro';
 import Ph from '../components/Ph.astro';
-import { WORKSHOP_NAME, SITE_DESCRIPTION, PROJECT_LEAD } from '../config';
+import { WORKSHOP_NAME, SITE_DESCRIPTION, PROJECT_LEAD, SHOW_PROJECTS } from '../config';
 import { href, stripBase } from '../lib/url';
 
 export interface TocItem {
@@ -34,7 +34,7 @@ const canonical = Astro.site ? new URL(href(canonicalPath ?? current), Astro.sit
 
 const pages = [
   { path: '/', label: 'Call' },
-  { path: '/projects', label: 'Projects' },
+  ...(SHOW_PROJECTS ? [{ path: '/projects', label: 'Projects' }] : []),
   { path: '/data-and-evaluation', label: 'Data & evaluation' },
   { path: '/people', label: 'People' },
   { path: '/apply', label: 'Apply' },

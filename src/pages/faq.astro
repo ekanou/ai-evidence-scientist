@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { href } from '../lib/url';
-import { TREC_TRACK_ACCEPTED } from '../config';
+import { TREC_TRACK_ACCEPTED, SHOW_PROJECTS } from '../config';
 
 const toc = [
   { id: 'replacing-reviewers', label: 'Replacing human reviewers?' },
@@ -29,9 +29,13 @@ const toc = [
     <p>
       Yes. The call is for MSc AI students at the University of Amsterdam, who can take the work as their
       Project AI or as their MSc thesis. The internship runs for at least eight weeks, the length of Project AI.
-      Participants are appointed as interns and receive a light remuneration. Every project on
-      the <a href={href('/projects')}>projects page</a> is sized for eight weeks and describes how it extends
-      into a thesis. You do not choose a project when you apply.
+      Participants are appointed as interns and receive a light remuneration.
+      {SHOW_PROJECTS && (
+        <>
+          Every project on the <a href={href('/projects')}>projects page</a> is sized for eight weeks and
+          describes how it extends into a thesis. You do not choose a project when you apply.
+        </>
+      )}
     </p>
   </section>
 

@@ -7,7 +7,7 @@ import ResearchArea from './ResearchArea.astro';
 import References from './References.astro';
 import ApplyBox from './ApplyBox.astro';
 import Ph from './Ph.astro';
-import { WORKSHOP_NAME, YEAR, TREC_TRACK_ACCEPTED } from '../config';
+import { WORKSHOP_NAME, YEAR, TREC_TRACK_ACCEPTED, SHOW_PROJECTS } from '../config';
 import { getResearchAreas, getProjects } from '../lib/editions';
 import { href } from '../lib/url';
 
@@ -20,7 +20,7 @@ const d = edition.data;
 const isCurrent = d.year === YEAR;
 const { Content } = await render(edition);
 const areas = await getResearchAreas(d.year);
-const projects = await getProjects(d.year);
+const projects = SHOW_PROJECTS ? await getProjects(d.year) : [];
 
 const toc = [
   { id: 'premise', label: 'Premise' },

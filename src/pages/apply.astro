@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ph from '../components/Ph.astro';
-import { WORKSHOP_NAME, YEAR } from '../config';
+import { WORKSHOP_NAME, YEAR, SHOW_PROJECTS } from '../config';
 import { href } from '../lib/url';
 
 const toc = [
@@ -36,13 +36,21 @@ const toc = [
       MSc thesis on agentic AI for systematic reviews. You do not need medical training; see
       the <a href={href('/faq')}>FAQ</a>.
     </p>
-    <p>
-      You do not choose a project when you apply. The <a href={href('/projects')}>projects</a> show the kinds
-      of work on offer: each one fits the eight weeks of Project AI and describes how it extends into a
-      thesis. The research areas behind them are
-      in <a href={`${href('/')}#research-areas`}>the call</a>, and the task and scoring design is on
-      the <a href={href('/data-and-evaluation')}>data and evaluation</a> page.
-    </p>
+    {SHOW_PROJECTS ? (
+      <p>
+        You do not choose a project when you apply. The <a href={href('/projects')}>projects</a> show the kinds
+        of work on offer: each one fits the eight weeks of Project AI and describes how it extends into a
+        thesis. The research areas behind them are
+        in <a href={`${href('/')}#research-areas`}>the call</a>, and the task and scoring design is on
+        the <a href={href('/data-and-evaluation')}>data and evaluation</a> page.
+      </p>
+    ) : (
+      <p>
+        The research areas are listed
+        in <a href={`${href('/')}#research-areas`}>the call</a>, and the task and scoring design is on
+        the <a href={href('/data-and-evaluation')}>data and evaluation</a> page.
+      </p>
+    )}
   </section>
 
   <section aria-labelledby="funding">

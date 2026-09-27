@@ -6,6 +6,7 @@ This file briefs Claude Code on the project. Read it fully before writing code. 
 
 - 2026-09-27: The host is the UvA. The call is for MSc AI students who want to do Project AI or a thesis, and it pays a light remuneration as an internship.
 - 2026-09-27: The organisers are Jingfen Qiao, Roxana Petcu and Gabriella Poerwawinata, all PhD students at UvA IRLab.
+- 2026-09-27: The projects page is hidden for now (`SHOW_PROJECTS = false` in `src/config.ts`). Its content stays in the repo.
 - 2026-09-27: Students do not choose projects when they apply. The projects page shows the kinds of work on offer, and the application note does not ask for project preferences.
 - 2026-09-27: The duration is at least eight weeks, because Project AI lasts two months. This replaces "ten weeks". The research areas are broken down into student projects (a `/projects` page, with content in `src/content/projects/<year>/`), each sized for eight weeks and extendable to a thesis.
 

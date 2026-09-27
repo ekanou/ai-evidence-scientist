@@ -86,5 +86,12 @@ export const PROJECT_LEAD = {
 export const SITE_DESCRIPTION =
   'An in-person summer research workshop at the University of Amsterdam on agentic AI for medical systematic reviews, for MSc AI students doing Project AI or their thesis.';
 
+/**
+ * Whether the student projects are public. When false, /projects/ is not built and
+ * every link to it disappears (nav, research areas, call, Apply, FAQ).
+ * The content stays in src/content/projects/. Owner decision 2026-09-27: hidden for now.
+ */
+export const SHOW_PROJECTS = false;
+
 /** Whether the TREC track has been accepted. Keep false until the owner confirms. */
 export const TREC_TRACK_ACCEPTED = false;
