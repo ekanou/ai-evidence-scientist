@@ -6,18 +6,21 @@ import { href } from '../lib/url';
 
 const toc = [
   { id: 'who', label: 'Who should apply' },
-  { id: 'funding', label: 'What the workshop funds' },
+  { id: 'funding', label: 'Remuneration' },
   { id: 'how', label: 'How to apply' },
   { id: 'deadline', label: 'Deadline and decisions' },
 ];
 ---
 <BaseLayout
   title="Apply"
-  description="Who should apply to the workshop, what it funds, how to apply and when decisions are made."
+  description="Who should apply to the workshop, the internship remuneration, how to apply and when decisions are made."
   toc={toc}
 >
   <h1>Apply to {WORKSHOP_NAME} {YEAR}</h1>
-  <p class="lede">A funded, in-person workshop of ten weeks. Decisions are made on a rolling basis, so apply early.</p>
+  <p class="lede">
+    A ten-week, in-person internship at the University of Amsterdam, for your Project AI or MSc thesis.
+    Decisions are made on a rolling basis, so apply early.
+  </p>
 
   <dl class="facts">
     <div><dt>Dates</dt><dd><Ph k="DATES" /></dd></div>
@@ -28,9 +31,9 @@ const toc = [
   <section aria-labelledby="who">
     <h2 id="who">Who should apply</h2>
     <p>
-      We invite researchers and students in information retrieval, NLP, machine learning, biostatistics and
-      evidence synthesis. PhD students, postdocs and faculty are all welcome. You do not need medical training;
-      see the <a href={href('/faq')}>FAQ</a>.
+      The call is for MSc AI students at the University of Amsterdam who want to do their Project AI or their
+      MSc thesis on agentic AI for systematic reviews. You do not need medical training; see
+      the <a href={href('/faq')}>FAQ</a>.
     </p>
     <p>
       The research areas are listed in <a href={`${href('/')}#research-areas`}>the call</a>, and the task and
@@ -39,7 +42,7 @@ const toc = [
   </section>
 
   <section aria-labelledby="funding">
-    <h2 id="funding">What the workshop funds</h2>
+    <h2 id="funding">Remuneration</h2>
     <p><Ph k="FUNDING_DETAILS" /></p>
   </section>
 
@@ -47,7 +50,8 @@ const toc = [
     <h2 id="how">How to apply</h2>
     <p>
       Send a CV and a short note on your interest to <Ph k="CONTACT_EMAIL" as="email" />. In the note, tell us
-      which research areas you would work on and what you would bring to them.
+      which research areas you would work on, what you would bring to them, and whether you would take the
+      project as your Project AI or your MSc thesis.
     </p>
   </section>
 

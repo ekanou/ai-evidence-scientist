@@ -30,15 +30,15 @@ export const placeholders = {
   WORKSHOP_NAME: p('The AI Evidence Scientist', false, 'The AI Evidence Scientist', 'Working name; confirm the final name.'),
   YEAR: p<number>(2027, false, '2027', 'Edition year.'),
   DATES: p(null, false, 'Dates to be announced', 'Workshop dates, e.g. "8 June – 14 August 2027".'),
-  LOCATION: p(null, false, 'Location to be announced', 'City and venue.'),
-  HOST_INSTITUTION: p(null, false, 'Host institution to be announced', 'Host institution name.'),
+  LOCATION: p('University of Amsterdam, Amsterdam', false, 'Location to be announced', 'Inferred from the host; confirm the building or venue.'),
+  HOST_INSTITUTION: p('University of Amsterdam', true, 'Host institution to be announced', 'Host institution name.'),
   CONTACT_EMAIL: p(null, false, 'the organisers (address to be announced)', 'Public contact address for applications and questions.'),
   DEADLINE: p(null, false, 'to be announced', 'Final application deadline, e.g. "15 February 2027".'),
   FUNDING_DETAILS: p(
-    null,
-    false,
-    'Details of what the workshop funds (travel, accommodation, stipends) will be published here.',
-    'What the workshop pays for, and for whom.',
+    'Participants are appointed as interns and receive a light remuneration.',
+    true,
+    'Details of the remuneration will be published here.',
+    'Remuneration terms (owner: light remuneration, as an internship).',
   ),
   PARTNER_INSTITUTIONS: p<string[]>(null, false, 'Partner institutions to be announced', 'Confirmed partner institutions.'),
   ORGANISERS: p<string[]>(null, false, 'Organising group being formed', 'Confirmed organisers beyond the project lead.'),
@@ -79,7 +79,7 @@ export const PROJECT_LEAD = {
 };
 
 export const SITE_DESCRIPTION =
-  'A funded, in-person summer research workshop on agentic AI for medical systematic reviews, using living review updates as a testbed.';
+  'An in-person summer research workshop at the University of Amsterdam on agentic AI for medical systematic reviews, for MSc AI students doing Project AI or their thesis.';
 
 /** Whether the TREC track has been accepted. Keep false until the owner confirms. */
 export const TREC_TRACK_ACCEPTED = false;

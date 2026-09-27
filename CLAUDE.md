@@ -2,19 +2,23 @@
 
 This file briefs Claude Code on the project. Read it fully before writing code. When something here conflicts with a later instruction from the project owner in chat, the owner wins; update this file to match.
 
+## Owner decisions log
+
+- 2026-09-27: The host is the UvA. The call is for MSc AI students who want to do Project AI or a thesis, and it pays a light remuneration as an internship.
+
 ## 1. What we are building
 
-A small, static website for a funded, in-person summer research workshop on **agentic AI for medical systematic reviews**. The format is modelled on the Johns Hopkins HLTCOE SCALE workshops (see pages for SCALE 2025, 2026 and 2027 at https://hltcoe.jhu.edu/research/scale/). Each SCALE edition has one page per year: a title, dates, a motivating essay, a list of research areas, references, and an application call. Our site follows that information architecture, with a better design and one interactive element.
+A small, static website for an in-person summer research workshop on **agentic AI for medical systematic reviews**, hosted by the University of Amsterdam. Participants are MSc AI students doing their Project AI or MSc thesis, appointed as interns with a light remuneration. The format is modelled on the Johns Hopkins HLTCOE SCALE workshops (see pages for SCALE 2025, 2026 and 2027 at https://hltcoe.jhu.edu/research/scale/). Each SCALE edition has one page per year: a title, dates, a motivating essay, a list of research areas, references, and an application call. Our site follows that information architecture, with a better design and one interactive element.
 
 **Important:** we are not SCALE and not JHU. Do not use the SCALE name, JHU/HLTCOE logos, or their wording. Structure is borrowed; content and brand are ours.
 
 - Working name: `{{WORKSHOP_NAME}}` — use "The AI Evidence Scientist" until the owner confirms a name. Keep the name in one config value so it can be changed in one place.
 - Edition: `{{YEAR}}` (default 2027).
-- Host institution, location, dates, contact email, deadline: placeholders (see §7).
+- Host institution: University of Amsterdam (UvA), confirmed by the owner on 2026-09-27. Location, dates, contact email and deadline are placeholders (see §7).
 - Project lead: Evangelos Kanoulas, University of Amsterdam, IRLab (e.kanoulas@uva.nl). Confirm before publishing any other names.
 
 ### Audience and the site's primary job
-1. Researchers and PhD students (IR, NLP, ML) deciding whether to apply → the site must make the research problem compelling and the application path obvious.
+1. MSc AI students (UvA) looking for a Project AI or MSc thesis topic, deciding whether to apply → the site must make the research problem compelling and the application path obvious.
 2. Clinical methodologists, Cochrane/evidence-synthesis people, biostatisticians, who we need as partners and assessors → the site must show we understand how reviews are actually done.
 3. Funders and prospective co-organisers → the site must look credible and precise.
 
@@ -60,7 +64,7 @@ src/
 | Home (current edition) | The call itself: hero, dates, premise essay, research areas, references, apply box. Mirrors a SCALE edition page. |
 | Data & evaluation | The task definition, frozen collections, review/update pairs, what participants submit, how it is scored, leakage safeguards. |
 | People | Organisers, partner institutions, methodologist advisors. Ship with an honest "Organising group being formed — get in touch" state; never invent people. |
-| Apply | Who should apply, what the workshop funds (placeholder), how to apply, deadline, rolling decisions. |
+| Apply | Who should apply (MSc AI students, Project AI or thesis), remuneration (light, as an internship), how to apply, deadline, rolling decisions. |
 | FAQ | "Is this replacing human reviewers?", "Do I need medical training?", "Relationship to TREC?", "Will data be released?" |
 | Editions archive | Year list in nav, like SCALE. Only 2027 exists at launch. |
 
@@ -71,7 +75,7 @@ Use this copy as written; light edits for flow are fine. Do not add claims or st
 ### Hero
 **{{WORKSHOP_NAME}} {{YEAR}}: Living Systematic Reviews as a Testbed for Agentic Research**
 
-{{DATES}} · {{LOCATION}} · Funded, in-person, ten weeks
+{{DATES}} · {{LOCATION}} · In-person internship, ten weeks, light remuneration
 
 Lede: *Can an AI agent carry out a medical systematic review — and how would we know if it got the conclusion wrong?*
 
@@ -102,7 +106,7 @@ Frozen literature collections; review/update task pairs with adjudicated conclus
 The workshop is designed to build the collection, baselines and validated metrics for a proposed TREC track on technology-assisted review and agentic evidence synthesis. Phrase this as "proposed" unless the owner confirms acceptance.
 
 ### Apply box
-We invite researchers and students in information retrieval, NLP, machine learning, biostatistics and evidence synthesis to apply. Send a CV and a short note on your interest to {{CONTACT_EMAIL}}. Final deadline {{DEADLINE}}; decisions are made on a rolling basis, so apply early.
+We invite MSc AI students at the University of Amsterdam who want to do their Project AI or their MSc thesis on this problem to apply. The workshop is an internship with a light remuneration. Send a CV and a short note on your interest to {{CONTACT_EMAIL}}. Final deadline {{DEADLINE}}; decisions are made on a rolling basis, so apply early.
 
 ### Data & evaluation page (expand from the premise)
 Explain in plain prose, with one diagram (the review loop, below):
@@ -142,6 +146,8 @@ Do not add references from memory. For each, confirm the exact title and a worki
 Put all of these in `src/config.ts`. In development, render unfilled values with a visible dashed outline so they cannot ship unnoticed; `npm run build` should warn listing any that remain.
 
 `WORKSHOP_NAME`, `YEAR`, `DATES`, `LOCATION`, `HOST_INSTITUTION`, `CONTACT_EMAIL`, `DEADLINE`, `FUNDING_DETAILS`, partner institutions, organiser list.
+
+Filled by the owner so far: `HOST_INSTITUTION` (University of Amsterdam) and `FUNDING_DETAILS` (light remuneration, as an internship). `LOCATION` is set to "University of Amsterdam, Amsterdam" by inference, but the venue is still unconfirmed.
 
 ## 8. Design brief
 
