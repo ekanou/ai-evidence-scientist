@@ -1,16 +1,30 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
+import { projectSlug } from '../lib/editions';
+import { href } from '../lib/url';
 
 interface Props {
   area: CollectionEntry<'researchAreas'>;
+  projects?: CollectionEntry<'projects'>[];
 }
-const { area } = Astro.props;
+const { area, projects = [] } = Astro.props;
 const { Content } = await render(area);
 const id = `area-${area.data.order}`;
 ---
 <li class="area" aria-labelledby={id}>
   <h3 id={id}>{area.data.title}</h3>
   <div class="area-body"><Content /></div>
+  {projects.length > 0 && (
+    <p class="area-projects">
+      <span class="label">{projects.length === 1 ? 'Project' : 'Projects'}:</span>{' '}
+      {projects.map((p, i) => (
+        <>
+          {i > 0 && '; '}
+          <a href={`${href('/projects')}#${projectSlug(p.data.title)}`}>{p.data.title}</a>
+        </>
+      ))}
+    </p>
+  )}
 </li>
 
 <style>
@@ -31,7 +45,7 @@ const id = `area-${area.data.order}`;
 
   .area::before {
     content: counter(area);
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 3;
     font-family: var(--sans);
     font-weight: 700;
     font-size: 1rem;
@@ -47,6 +61,28 @@ const id = `area-${area.data.order}`;
 
   .area-body :global(p) {
     margin: 0;
+  }
+
+  .area-projects {
+    grid-column: 2;
+    margin: var(--space-2) 0 0;
+    font-family: var(--sans);
+    font-size: var(--text-xsmall);
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .area-projects a {
+    color: var(--muted);
+  }
+
+  .area-projects a:hover {
+    color: var(--ink);
+  }
+
+  .area-projects .label {
+    font-weight: 600;
+    color: var(--ink);
   }
 
   @media (min-width: 64rem) {

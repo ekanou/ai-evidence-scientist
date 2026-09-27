@@ -8,7 +8,7 @@ import References from './References.astro';
 import ApplyBox from './ApplyBox.astro';
 import Ph from './Ph.astro';
 import { WORKSHOP_NAME, YEAR, TREC_TRACK_ACCEPTED } from '../config';
-import { getResearchAreas } from '../lib/editions';
+import { getResearchAreas, getProjects } from '../lib/editions';
 import { href } from '../lib/url';
 
 interface Props {
@@ -20,6 +20,7 @@ const d = edition.data;
 const isCurrent = d.year === YEAR;
 const { Content } = await render(edition);
 const areas = await getResearchAreas(d.year);
+const projects = await getProjects(d.year);
 
 const toc = [
   { id: 'premise', label: 'Premise' },
@@ -83,8 +84,16 @@ if (d.trec && !TREC_TRACK_ACCEPTED && !/\bproposed\b/i.test(d.trec)) {
     <section aria-labelledby="research-areas">
       <h2 id="research-areas">Research areas</h2>
       <ol class="areas">
-        {areas.map((a) => <ResearchArea area={a} />)}
+        {areas.map((a) => (
+          <ResearchArea area={a} projects={projects.filter((p) => p.data.areas.includes(a.data.order))} />
+        ))}
       </ol>
+      {projects.length > 0 && (
+        <p class="projects-note">
+          The areas break down into {projects.length} student projects. Each one fits the eight weeks of Project
+          AI and can grow into an MSc thesis. <a href={href('/projects')}>See all projects</a>.
+        </p>
+      )}
     </section>
   )}
 
@@ -182,6 +191,12 @@ if (d.trec && !TREC_TRACK_ACCEPTED && !/\bproposed\b/i.test(d.trec)) {
     padding: 0;
     margin: 0;
     counter-reset: area;
+  }
+
+  .projects-note {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--rule);
   }
 
   .outputs {

@@ -25,6 +25,7 @@ The TREC paragraph stays "proposed" until `TREC_TRACK_ACCEPTED` is `true`, and t
 
 - `src/content/editions/<year>.md`: one file per edition. The frontmatter holds the title, lede, outputs, the TREC paragraph and reference ids. The body is the premise essay.
 - `src/content/research-areas/<year>/NN-slug.md`: one file per research area, ordered by `order`.
+- `src/content/projects/<year>/NN-slug.md`: student projects, each sized for Project AI (eight weeks) with a thesis extension. The frontmatter holds the title, stage, research areas, question and background. The body holds the "In eight weeks", "As a thesis" and "Starting data" paragraphs. To link to another project, use `#<slugified-title>`.
 - `src/content/people/*.md`: confirmed people only.
 - `src/content/references.json`: the verified references. Cite them in Markdown as `[Cao et al., 2025](#ref-cao-2025)`.
 

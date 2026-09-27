@@ -28,3 +28,22 @@ export async function getReferences(ids: string[]) {
     return ref;
   });
 }
+
+export async function getProjects(year: number) {
+  const projects = await getCollection('projects', (p) => p.data.edition === year);
+  return projects.sort((a, b) => a.data.order - b.data.order);
+}
+
+/** Anchor id for a project, derived from its title (used for cross-links in Markdown). */
+export function projectSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
+
+/** Reference ids cited as (#ref-…) links in a Markdown body. */
+export function citedReferenceIds(markdown: string | undefined): string[] {
+  return [...(markdown ?? '').matchAll(/\(#ref-([a-z0-9-]+)\)/g)].map((m) => m[1]);
+}

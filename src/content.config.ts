@@ -35,6 +35,31 @@ const researchAreas = defineCollection({
   }),
 });
 
+/** Student projects, sized for Project AI (eight weeks) and extendable to a thesis. */
+export const PROJECT_STAGES = [
+  { id: 'infrastructure', label: 'Shared infrastructure' },
+  { id: 'search', label: 'Search' },
+  { id: 'stopping', label: 'Deciding to search again' },
+  { id: 'screening', label: 'Screening, extraction and appraisal' },
+  { id: 'evaluation', label: 'Evaluation' },
+  { id: 'systems', label: 'Agent design and human effort' },
+] as const;
+
+const projects = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
+  schema: z.object({
+    edition: z.number().int(),
+    order: z.number().int(),
+    title: z.string(),
+    stage: z.enum(PROJECT_STAGES.map((s) => s.id) as [string, ...string[]]),
+    /** Research-area numbers (the `order` of research-areas entries). */
+    areas: z.array(z.number().int()).min(1),
+    /** The one-sentence research question. */
+    question: z.string(),
+    background: z.string(),
+  }),
+});
+
 /** Only people the owner has confirmed. Never invent entries. */
 const people = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/people' }),
@@ -65,4 +90,4 @@ const references = defineCollection({
   }),
 });
 
-export const collections = { editions, researchAreas, people, references };
+export const collections = { editions, researchAreas, projects, people, references };

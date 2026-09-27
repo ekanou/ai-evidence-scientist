@@ -104,6 +104,10 @@ A vertical flowchart as inline SVG, readable at 360px: five process boxes, then 
    - The current Cochrane Handbook is version 6.5 (updated August 2024).
 6. **Placeholder warnings.** §2 asks for a build with zero warnings, and §7 asks the build to warn about unfilled placeholders. The only warnings the build emits are the placeholder list. Set `STRICT_PLACEHOLDERS=1` to turn them into a build failure before launch.
 
+## 8a. Projects page (added after owner feedback)
+
+Projects are grouped by stage of the review loop, not numbered, because they are not ordered. They cross-reference each other by title link. A tinted "All projects by stage" overview at the top serves as the page's table of contents on narrow screens. Each project has a title, its question in italics, a small sans metadata list (research areas, useful background) and three labelled paragraphs.
+
 ## 9. Verification (September 2026)
 
 - Lighthouse runs on the production build under a sub-path, with all five pages tested. Mobile scores 97–100 for performance and 100 for accessibility, best practices and SEO. Desktop scores 100 in every category. Stylesheets are inlined (`build.inlineStylesheets: 'always'`) to remove render-blocking requests.

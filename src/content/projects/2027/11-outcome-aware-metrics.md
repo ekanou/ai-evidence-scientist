@@ -1,0 +1,15 @@
+---
+edition: 2027
+order: 11
+title: Outcome-aware evaluation metrics
+stage: evaluation
+areas: [4]
+question: How much does a missed study cost, given what else was found?
+background: Statistics, meta-analysis, IR evaluation
+---
+
+**In eight weeks.** Re-run meta-analyses with studies removed, the way a screening system would miss them, and build metrics that score a run by whether the conclusion changes: its direction, a decision threshold, its certainty. This builds on [Norman et al. (2019)](#ref-norman-2019) and [Kusa et al. (2023)](#ref-kusa-2023).
+
+**As a thesis.** Rank systems under different assumed prices of a missed study, and report how the rankings change.
+
+**Starting data.** Reviews that publish the data behind their meta-analyses.

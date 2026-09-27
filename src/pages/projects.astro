@@ -1,0 +1,209 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import References from '../components/References.astro';
+import { PROJECT_STAGES } from '../content.config';
+import { YEAR } from '../config';
+import { getProjects, getResearchAreas, projectSlug, citedReferenceIds } from '../lib/editions';
+import { href } from '../lib/url';
+
+const projects = await getProjects(YEAR);
+const areas = await getResearchAreas(YEAR);
+const areaTitle = new Map(areas.map((a) => [a.data.order, a.data.title]));
+
+const rendered = await Promise.all(
+  projects.map(async (p) => ({ p, slug: projectSlug(p.data.title), Content: (await render(p)).Content })),
+);
+const stages = PROJECT_STAGES.map((s) => ({ ...s, items: rendered.filter((r) => r.p.data.stage === s.id) })).filter(
+  (s) => s.items.length > 0,
+);
+const refIds = [...new Set(projects.flatMap((p) => citedReferenceIds(p.body)))];
+
+const toc = [
+  ...stages.map((s) => ({ id: `stage-${s.id}`, label: s.label })),
+  ...(refIds.length ? [{ id: 'references', label: 'References' }] : []),
+];
+---
+<BaseLayout
+  title="Projects"
+  description="Student projects for Project AI or an MSc thesis, each covering one part of an agentic systematic-review pipeline."
+  activeYear={YEAR}
+  toc={toc}
+>
+  <h1>Projects</h1>
+  <p class="lede">
+    The research areas break down into {projects.length} projects. Each one fits the eight weeks of Project AI
+    and can grow into an MSc thesis.
+  </p>
+  <p>
+    The projects share infrastructure: frozen collections, an open action log and baseline agents. Work on one
+    part of the review pipeline therefore feeds the others. Projects that need the workshop's collections can
+    start on existing ones and move over as the frozen collections come online. The stages follow
+    the <a href={`${href('/data-and-evaluation')}#loop`}>review loop</a>.
+  </p>
+
+  <nav class="overview" aria-labelledby="overview-heading">
+    <h2 id="overview-heading" class="overview-heading">All projects by stage</h2>
+    <div class="overview-grid">
+      {stages.map((s) => (
+        <div>
+          <p class="overview-stage"><a href={`#stage-${s.id}`}>{s.label}</a></p>
+          <ul>
+            {s.items.map((r) => (
+              <li><a href={`#${r.slug}`}>{r.p.data.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </nav>
+
+  {stages.map((s) => (
+    <section aria-labelledby={`stage-${s.id}`}>
+      <h2 id={`stage-${s.id}`}>{s.label}</h2>
+      {s.items.map(({ p, slug, Content }) => (
+        <article class="project" aria-labelledby={slug}>
+          <h3 id={slug}>{p.data.title}</h3>
+          <p class="question">{p.data.question}</p>
+          <dl class="meta">
+            <div>
+              <dt>Research {p.data.areas.length > 1 ? 'areas' : 'area'}</dt>
+              <dd>
+                {p.data.areas.map((n, i) => (
+                  <>
+                    {i > 0 && ', '}
+                    <a href={`${href('/')}#area-${n}`}>{n}. {areaTitle.get(n)}</a>
+                  </>
+                ))}
+              </dd>
+            </div>
+            <div>
+              <dt>Useful background</dt>
+              <dd>{p.data.background}</dd>
+            </div>
+          </dl>
+          <div class="body"><Content /></div>
+        </article>
+      ))}
+    </section>
+  ))}
+
+  {refIds.length > 0 && (
+    <section aria-labelledby="references">
+      <h2 id="references">References</h2>
+      <References ids={refIds} />
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  h1 + .lede {
+    margin-top: var(--space-4);
+  }
+
+  .overview {
+    margin: var(--space-6) 0 0;
+    padding: var(--space-4) var(--space-5) var(--space-3);
+    background: var(--wash);
+    border-top: 2px solid var(--ink);
+    max-width: var(--figure-max);
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    line-height: 1.4;
+  }
+
+  .overview-heading {
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    font-weight: 700;
+    margin: 0 0 var(--space-3);
+    padding: 0;
+    border: 0;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: var(--space-2) var(--space-5);
+  }
+
+  .overview-stage {
+    font-weight: 600;
+    margin: 0 0 var(--space-1);
+  }
+
+  .overview-stage a {
+    text-decoration: none;
+  }
+
+  .overview ul {
+    list-style: none;
+    margin: 0 0 var(--space-3);
+    padding: 0;
+  }
+
+  .overview li {
+    padding-block: 0.2rem;
+  }
+
+  .overview li a {
+    color: var(--muted);
+  }
+
+  .overview li a:hover {
+    color: var(--ink);
+  }
+
+  .project {
+    padding-block: var(--space-5) var(--space-3);
+    border-top: 1px solid var(--rule);
+  }
+
+  h2 + .project {
+    border-top: 0;
+    padding-top: var(--space-2);
+  }
+
+  .project h3 {
+    margin: 0 0 var(--space-2);
+  }
+
+  .question {
+    font-style: italic;
+    font-size: 1.05em;
+    margin-bottom: var(--space-3);
+  }
+
+  .meta {
+    display: grid;
+    gap: 0.15rem;
+    margin: 0 0 var(--space-4);
+    font-family: var(--sans);
+    font-size: var(--text-xsmall);
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  .meta > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.5em;
+  }
+
+  .meta dt {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .meta dt::after {
+    content: ':';
+  }
+
+  .meta dd {
+    margin: 0;
+  }
+
+  .body :global(p) {
+    margin-bottom: var(--space-3);
+  }
+</style>

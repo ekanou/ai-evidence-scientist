@@ -5,6 +5,7 @@ This file briefs Claude Code on the project. Read it fully before writing code. 
 ## Owner decisions log
 
 - 2026-09-27: The host is the UvA. The call is for MSc AI students who want to do Project AI or a thesis, and it pays a light remuneration as an internship.
+- 2026-09-27: The duration is at least eight weeks, because Project AI lasts two months. This replaces "ten weeks". The research areas are broken down into student projects (a `/projects` page, with content in `src/content/projects/<year>/`), each sized for eight weeks and extendable to a thesis.
 
 ## 1. What we are building
 
@@ -75,7 +76,7 @@ Use this copy as written; light edits for flow are fine. Do not add claims or st
 ### Hero
 **{{WORKSHOP_NAME}} {{YEAR}}: Living Systematic Reviews as a Testbed for Agentic Research**
 
-{{DATES}} · {{LOCATION}} · In-person internship, ten weeks, light remuneration
+{{DATES}} · {{LOCATION}} · In-person internship of at least eight weeks, light remuneration
 
 Lede: *Can an AI agent carry out a medical systematic review — and how would we know if it got the conclusion wrong?*
 
