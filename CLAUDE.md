@@ -8,6 +8,7 @@ This file briefs Claude Code on the project. Read it fully before writing code. 
 - 2026-09-27: The organisers are Jingfen Qiao, Roxana Petcu and Gabriella Poerwawinata, all PhD students at UvA IRLab.
 - 2026-09-27: There is no deadline; applications are rolling. Applications go to e.kanoulas@uva.nl and j.qiao@uva.nl (Jingfen Qiao).
 - 2026-09-27: The location is Lab42, Science Park Amsterdam. There are no fixed dates: it is a running project that participants can start at any time, not a summer workshop.
+- 2026-09-27: Visible copy says "project", not "workshop". Where "project" would clash with the student projects or Project AI, use "we" or "our". The year and editions structure stay for now.
 - 2026-09-27: The projects page stays public. `SHOW_PROJECTS` in `src/config.ts` can hide it (and every link to it) if needed.
 - 2026-09-27: Students do not choose projects when they apply. The projects page shows the kinds of work on offer, and the application note does not ask for project preferences.
 - 2026-09-27: The duration is at least eight weeks, because Project AI lasts two months. This replaces "ten weeks". The research areas are broken down into student projects (a `/projects` page, with content in `src/content/projects/<year>/`), each sized for eight weeks and extendable to a thesis.

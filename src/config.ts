@@ -1,5 +1,5 @@
 /**
- * Every fact about the workshop that the owner still has to confirm lives here.
+ * Every fact about the project that the owner still has to confirm lives here.
  *
  * A placeholder is `{ value, confirmed }`:
  * - `value: null` means nothing is known yet; pages show the `fallback` text.
