@@ -89,9 +89,9 @@ export const SITE_DESCRIPTION =
 /**
  * Whether the student projects are public. When false, /projects/ is not built and
  * every link to it disappears (nav, research areas, call, Apply, FAQ).
- * The content stays in src/content/projects/. Owner decision 2026-09-27: hidden for now.
+ * The content stays in src/content/projects/ either way.
  */
-export const SHOW_PROJECTS = false;
+export const SHOW_PROJECTS = true;
 
 /** Whether the TREC track has been accepted. Keep false until the owner confirms. */
 export const TREC_TRACK_ACCEPTED = false;
