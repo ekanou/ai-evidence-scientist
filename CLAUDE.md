@@ -5,6 +5,7 @@ This file briefs Claude Code on the project. Read it fully before writing code. 
 ## Owner decisions log
 
 - 2026-09-27: The host is the UvA. The call is for MSc AI students who want to do Project AI or a thesis, and it pays a light remuneration as an internship.
+- 2026-09-27: The organisers are Jingfen Qiao, Roxana Petcu and Gabriella Poerwawinata. Their affiliations are not yet given, so leave them blank until confirmed.
 - 2026-09-27: The duration is at least eight weeks, because Project AI lasts two months. This replaces "ten weeks". The research areas are broken down into student projects (a `/projects` page, with content in `src/content/projects/<year>/`), each sized for eight weeks and extendable to a thesis.
 
 ## 1. What we are building
@@ -148,7 +149,7 @@ Put all of these in `src/config.ts`. In development, render unfilled values with
 
 `WORKSHOP_NAME`, `YEAR`, `DATES`, `LOCATION`, `HOST_INSTITUTION`, `CONTACT_EMAIL`, `DEADLINE`, `FUNDING_DETAILS`, partner institutions, organiser list.
 
-Filled by the owner so far: `HOST_INSTITUTION` (University of Amsterdam) and `FUNDING_DETAILS` (light remuneration, as an internship). `LOCATION` is set to "University of Amsterdam, Amsterdam" by inference, but the venue is still unconfirmed.
+Filled by the owner so far: `HOST_INSTITUTION` (University of Amsterdam), `FUNDING_DETAILS` (light remuneration, as an internship) and the organiser list (Jingfen Qiao, Roxana Petcu, Gabriella Poerwawinata). `LOCATION` is set to "University of Amsterdam, Amsterdam" by inference, but the venue is still unconfirmed.
 
 ## 8. Design brief
 

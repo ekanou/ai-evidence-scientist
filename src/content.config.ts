@@ -66,7 +66,8 @@ const people = defineCollection({
   schema: z.object({
     name: z.string(),
     role: z.enum(['lead', 'organiser', 'advisor']),
-    affiliation: z.string(),
+    /** Leave out until confirmed; never guess. */
+    affiliation: z.string().optional(),
     email: z.email().optional(),
     url: z.url().optional(),
     order: z.number().int().default(100),

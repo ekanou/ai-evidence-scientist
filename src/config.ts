@@ -41,7 +41,12 @@ export const placeholders = {
     'Remuneration terms (owner: light remuneration, as an internship).',
   ),
   PARTNER_INSTITUTIONS: p<string[]>(null, false, 'Partner institutions to be announced', 'Confirmed partner institutions.'),
-  ORGANISERS: p<string[]>(null, false, 'Organising group being formed', 'Confirmed organisers beyond the project lead.'),
+  ORGANISERS: p<string[]>(
+    ['Jingfen Qiao', 'Roxana Petcu', 'Gabriella Poerwawinata'],
+    true,
+    'Organising group being formed',
+    'Confirmed organisers beyond the project lead (listed in src/content/people/).',
+  ),
 } satisfies Record<string, Placeholder<unknown>>;
 
 export type PlaceholderKey = keyof typeof placeholders;

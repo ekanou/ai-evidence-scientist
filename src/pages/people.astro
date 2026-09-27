@@ -12,9 +12,9 @@ const partners = placeholders.PARTNER_INSTITUTIONS.value ?? [];
 ---
 <BaseLayout title="People" description="The organising group, partner institutions and methodologist advisors for the workshop.">
   <h1>People</h1>
-  <p class="lede">The organising group is being formed. Get in touch if you would like to be part of it.</p>
+  <p class="lede">The organising team is in place. We are still looking for partner institutions and methodologist advisors.</p>
   <p>
-    We are looking for co-organisers, partner institutions, and clinical methodologists, evidence-synthesis
+    We would like to hear from partner institutions, and from clinical methodologists, evidence-synthesis
     specialists and biostatisticians who can advise on task design and adjudicate the conclusions that
     systems are scored against. Write to {PROJECT_LEAD.name}
     at <a href={`mailto:${PROJECT_LEAD.email}`}>{PROJECT_LEAD.email}</a>.
@@ -26,7 +26,7 @@ const partners = placeholders.PARTNER_INSTITUTIONS.value ?? [];
       {lead.map((p) => (
         <li>
           <span class="name">{p.name}</span>
-          <span class="aff">{p.affiliation}</span>
+          {p.affiliation && <span class="aff">{p.affiliation}</span>}
           {p.email && <a class="sans" href={`mailto:${p.email}`}>{p.email}</a>}
         </li>
       ))}
@@ -38,7 +38,7 @@ const partners = placeholders.PARTNER_INSTITUTIONS.value ?? [];
     {organisers.length > 0 ? (
       <ul class="people">
         {organisers.map((p) => (
-          <li><span class="name">{p.name}</span> <span class="aff">{p.affiliation}</span></li>
+          <li><span class="name">{p.name}</span> {p.affiliation && <span class="aff">{p.affiliation}</span>}</li>
         ))}
       </ul>
     ) : (
@@ -60,7 +60,7 @@ const partners = placeholders.PARTNER_INSTITUTIONS.value ?? [];
     {advisors.length > 0 ? (
       <ul class="people">
         {advisors.map((p) => (
-          <li><span class="name">{p.name}</span> <span class="aff">{p.affiliation}</span></li>
+          <li><span class="name">{p.name}</span> {p.affiliation && <span class="aff">{p.affiliation}</span>}</li>
         ))}
       </ul>
     ) : (
