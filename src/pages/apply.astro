@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ph from '../components/Ph.astro';
+import { WORKSHOP_NAME, YEAR } from '../config';
+import { href } from '../lib/url';
+
+const toc = [
+  { id: 'who', label: 'Who should apply' },
+  { id: 'funding', label: 'What the workshop funds' },
+  { id: 'how', label: 'How to apply' },
+  { id: 'deadline', label: 'Deadline and decisions' },
+];
+---
+<BaseLayout
+  title="Apply"
+  description="Who should apply to the workshop, what it funds, how to apply and when decisions are made."
+  toc={toc}
+>
+  <h1>Apply to {WORKSHOP_NAME} {YEAR}</h1>
+  <p class="lede">A funded, in-person workshop of ten weeks. Decisions are made on a rolling basis, so apply early.</p>
+
+  <dl class="facts">
+    <div><dt>Dates</dt><dd><Ph k="DATES" /></dd></div>
+    <div><dt>Location</dt><dd><Ph k="LOCATION" /></dd></div>
+    <div><dt>Final deadline</dt><dd><Ph k="DEADLINE" /></dd></div>
+  </dl>
+
+  <section aria-labelledby="who">
+    <h2 id="who">Who should apply</h2>
+    <p>
+      We invite researchers and students in information retrieval, NLP, machine learning, biostatistics and
+      evidence synthesis. PhD students, postdocs and faculty are all welcome. You do not need medical training;
+      see the <a href={href('/faq')}>FAQ</a>.
+    </p>
+    <p>
+      The research areas are listed in <a href={`${href('/')}#research-areas`}>the call</a>, and the task and
+      scoring design is on the <a href={href('/data-and-evaluation')}>data and evaluation</a> page.
+    </p>
+  </section>
+
+  <section aria-labelledby="funding">
+    <h2 id="funding">What the workshop funds</h2>
+    <p><Ph k="FUNDING_DETAILS" /></p>
+  </section>
+
+  <section aria-labelledby="how">
+    <h2 id="how">How to apply</h2>
+    <p>
+      Send a CV and a short note on your interest to <Ph k="CONTACT_EMAIL" as="email" />. In the note, tell us
+      which research areas you would work on and what you would bring to them.
+    </p>
+  </section>
+
+  <section aria-labelledby="deadline">
+    <h2 id="deadline">Deadline and decisions</h2>
+    <p>
+      Final deadline <Ph k="DEADLINE" />. Decisions are made on a rolling basis, so apply early.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 + .lede {
+    margin-top: var(--space-4);
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--space-3) var(--space-5);
+    margin: var(--space-5) 0 0;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--rule);
+    max-width: var(--figure-max);
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    line-height: 1.4;
+  }
+
+  .facts dt {
+    font-size: var(--text-xsmall);
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.15rem;
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+</style>

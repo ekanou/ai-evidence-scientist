@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { href } from '../lib/url';
+import { TREC_TRACK_ACCEPTED } from '../config';
+
+const toc = [
+  { id: 'replacing-reviewers', label: 'Replacing human reviewers?' },
+  { id: 'medical-training', label: 'Medical training?' },
+  { id: 'trec', label: 'Relationship to TREC' },
+  { id: 'data-release', label: 'Data release' },
+];
+---
+<BaseLayout title="Frequently asked questions" description="Answers to common questions about the workshop: human reviewers, medical training, TREC and data release." toc={toc}>
+  <h1>Frequently asked questions</h1>
+
+  <section aria-labelledby="replacing-reviewers">
+    <h2 id="replacing-reviewers">Is this replacing human reviewers?</h2>
+    <p>
+      No. The workshop measures what agents get right and wrong in a systematic review, and what that costs in
+      human time and compute. Systems are compared under fixed human-effort budgets, including human screening
+      followed by machine completion and model-routed selective review. The reference standard is a published
+      review update, adjudicated by methodologists.
+    </p>
+  </section>
+
+  <section aria-labelledby="medical-training">
+    <h2 id="medical-training">Do I need medical training?</h2>
+    <p>
+      No. We invite researchers and students in information retrieval, NLP, machine learning, biostatistics and
+      evidence synthesis. Search, stopping, extraction and evaluation are problems these fields already work on.
+      Methodologists adjudicate the conclusions that each task is scored against.
+    </p>
+  </section>
+
+  <section aria-labelledby="trec">
+    <h2 id="trec">What is the relationship to TREC?</h2>
+    <p>
+      The workshop is designed to build the collection, baselines and validated metrics for {TREC_TRACK_ACCEPTED ? 'the' : 'a proposed'} TREC
+      track on technology-assisted review and agentic evidence synthesis.
+    </p>
+  </section>
+
+  <section aria-labelledby="data-release">
+    <h2 id="data-release">Will data be released?</h2>
+    <p>
+      Yes. The frozen literature collections, the review/update task pairs with adjudicated conclusions, the
+      action-log format, baseline agents and the evaluation toolkit will all be released publicly. See
+      <a href={href('/data-and-evaluation')}>data and evaluation</a> for how they fit together.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  h2 {
+    font-size: 1.3rem;
+    margin-top: var(--space-7);
+  }
+</style>

@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ReviewLoop from '../components/ReviewLoop.astro';
+import { href } from '../lib/url';
+
+const toc = [
+  { id: 'task', label: 'The task' },
+  { id: 'collections', label: 'Frozen collections' },
+  { id: 'loop', label: 'The review loop' },
+  { id: 'submissions', label: 'What participants submit' },
+  { id: 'scoring', label: 'Scoring' },
+  { id: 'conditions', label: 'Workflow conditions' },
+  { id: 'leakage', label: 'Leakage safeguards' },
+];
+---
+<BaseLayout
+  title="Data and evaluation"
+  description="How the workshop's review/update tasks are built, what systems submit, and how submissions are scored against human and computational cost."
+  toc={toc}
+>
+  <h1>Data and evaluation</h1>
+  <p class="lede">
+    Each task pairs a published systematic review with its later update. An agent works from the review's
+    protocol against a frozen snapshot of the literature, and the published update, adjudicated by
+    methodologists, resolves the task.
+  </p>
+
+  <section aria-labelledby="task">
+    <h2 id="task">The task</h2>
+    <p>A system receives three inputs:</p>
+    <dl class="defs">
+      <div>
+        <dt>Protocol</dt>
+        <dd>The review question, the eligibility criteria and the outcomes of interest.</dd>
+      </div>
+      <div>
+        <dt>Frozen collection</dt>
+        <dd>The literature as it stood on the review's search date (see below).</dd>
+      </div>
+      <div>
+        <dt>Resource budget</dt>
+        <dd>A limit on human judgments and on compute.</dd>
+      </div>
+    </dl>
+    <p>
+      Within that budget the system chooses its own searches across sources, screens titles, abstracts and
+      full texts, extracts outcome data, assesses risk of bias, runs the meta-analysis in code and writes the
+      synthesis. Nothing is pre-filtered: there is no Boolean candidate set to screen.
+    </p>
+  </section>
+
+  <section aria-labelledby="collections">
+    <h2 id="collections">Frozen collections and review/update pairs</h2>
+    <p>
+      A published review and its later update form a natural experiment. For each pair we freeze the
+      literature (bibliographic databases, trial registries and preprints) twice: once at the original
+      review's search date and once at the update's search date.
+    </p>
+    <p>
+      In the first stage the agent produces the review from its protocol against the first snapshot. In the
+      second stage it updates its own review against the second snapshot. The published update resolves the
+      task, and methodologists adjudicate its conclusions: did the pooled effect change direction, did it
+      cross a decision threshold, did the certainty of evidence move?
+    </p>
+  </section>
+
+  <section aria-labelledby="loop">
+    <h2 id="loop">The review loop</h2>
+    <p>
+      Inside each stage an agent cycles through the same steps until it decides to stop. The decision to
+      search again is the step the workshop evaluates most closely: searching for confirmation and stopping too
+      early are the two failure modes that matter most.
+    </p>
+    <ReviewLoop />
+  </section>
+
+  <section aria-labelledby="submissions">
+    <h2 id="submissions">What participants submit</h2>
+    <p>Every run submits four things:</p>
+    <dl class="defs">
+      <div>
+        <dt>Selected studies</dt>
+        <dd>The studies the system included, each linked to its reports.</dd>
+      </div>
+      <div>
+        <dt>Eligibility decisions</dt>
+        <dd>Include and exclude decisions with the evidence that supports each one.</dd>
+      </div>
+      <div>
+        <dt>Synthesis</dt>
+        <dd>The review's findings with citations and explicit uncertainty.</dd>
+      </div>
+      <div>
+        <dt>Action log</dt>
+        <dd>Every search, every judgment, every human intervention and the stopping decision, in an open log format.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="scoring">
+    <h2 id="scoring">How submissions are scored</h2>
+    <p>Scoring connects three qualities of a finished review to the effort it took to produce:</p>
+    <dl class="defs">
+      <div>
+        <dt>Evidence coverage</dt>
+        <dd>Did the system find the studies that matter for the conclusion?</dd>
+      </div>
+      <div>
+        <dt>Decision correctness</dt>
+        <dd>Were eligibility, extraction and appraisal decisions right, and supported by evidence?</dd>
+      </div>
+      <div>
+        <dt>Synthesis and conclusion quality</dt>
+        <dd>Does the conclusion agree with the adjudicated update, and is its uncertainty stated honestly?</dd>
+      </div>
+    </dl>
+    <p>
+      Each is reported against the human and computational cost the run consumed. The cost of a missed study
+      depends on what else was found, as <a href={`${href('/')}#figure-1`}>Figure 1 on the call page</a> shows, so we report
+      how system rankings change with the assumed price of a missed study rather than naming a single winner.
+    </p>
+  </section>
+
+  <section aria-labelledby="conditions">
+    <h2 id="conditions">Workflow conditions</h2>
+    <p>Systems are compared under four ways of spending human effort:</p>
+    <dl class="defs">
+      <div>
+        <dt>Screen until stopping</dt>
+        <dd>The system decides when it has seen enough.</dd>
+      </div>
+      <div>
+        <dt>Fixed human budget</dt>
+        <dd>A set number of human judgments, used wherever the system chooses.</dd>
+      </div>
+      <div>
+        <dt>Budget, then machine completion</dt>
+        <dd>Humans screen up to the budget; the machine completes the rest.</dd>
+      </div>
+      <div>
+        <dt>Model-routed selective review</dt>
+        <dd>The model decides which items a human should review.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="leakage">
+    <h2 id="leakage">Leakage safeguards</h2>
+    <p>
+      Models have read the published reviews. We evaluate on reviews and updates published after model training
+      cutoffs. For each task we also record a zero-shot prediction of the conclusion, made without retrieval,
+      and score only the improvement over it.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .defs {
+    margin: 0 0 var(--space-5);
+    max-width: var(--measure);
+    border-top: 1px solid var(--rule);
+  }
+
+  .defs > div {
+    display: grid;
+    gap: 0 var(--space-5);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  @media (min-width: 40rem) {
+    .defs > div {
+      grid-template-columns: 11rem minmax(0, 1fr);
+    }
+  }
+
+  .defs dt {
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    padding-top: 0.2rem;
+  }
+
+  .defs dd {
+    margin: 0;
+  }
+
+  h1 + .lede {
+    margin-top: var(--space-4);
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import Ph from './Ph.astro';
+import { href } from '../lib/url';
+
+interface Props {
+  headingId?: string;
+}
+const { headingId = 'apply' } = Astro.props;
+---
+<section class="apply-box" aria-labelledby={headingId}>
+  <h2 id={headingId}>Apply</h2>
+  <p>
+    We invite researchers and students in information retrieval, NLP, machine learning, biostatistics and
+    evidence synthesis to apply. Send a CV and a short note on your interest to <Ph k="CONTACT_EMAIL" as="email" />.
+    Final deadline <Ph k="DEADLINE" />; decisions are made on a rolling basis, so apply early.
+  </p>
+  <p class="actions">
+    <a class="button" href={href('/apply')}>How to apply</a>
+  </p>
+</section>
+
+<style>
+  .apply-box {
+    margin-top: var(--space-8);
+    padding: var(--space-5) var(--space-5) var(--space-4);
+    background: var(--wash);
+    border-top: 2px solid var(--ink);
+    max-width: var(--figure-max);
+  }
+
+  h2 {
+    margin: 0 0 var(--space-3);
+    padding: 0;
+    border: 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+    margin: var(--space-4) 0 0;
+  }
+</style>

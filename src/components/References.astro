@@ -1,0 +1,44 @@
+---
+import { getReferences } from '../lib/editions';
+
+interface Props {
+  ids: string[];
+}
+const refs = (await getReferences(Astro.props.ids)).sort((a, b) =>
+  a.authors.localeCompare(b.authors) || a.year - b.year,
+);
+---
+<ol class="refs">
+  {refs.map((r) => (
+    <li id={`ref-${r.id}`}>
+      {r.authors} ({r.year}). <cite><a href={r.url}>{r.title}</a></cite>. {r.venue}{r.details ? `, ${r.details}` : ''}.
+    </li>
+  ))}
+</ol>
+
+<style>
+  .refs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+
+  li {
+    padding-left: 1.5em;
+    text-indent: -1.5em;
+    margin-bottom: var(--space-3);
+    max-width: 68ch;
+    overflow-wrap: anywhere;
+  }
+
+  li:target {
+    background: var(--wash);
+    box-shadow: -0.5rem 0 0 var(--wash), 0.5rem 0 0 var(--wash);
+  }
+
+  cite {
+    font-style: italic;
+  }
+</style>

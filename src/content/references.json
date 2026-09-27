@@ -1,0 +1,111 @@
+[
+  {
+    "id": "cao-2025",
+    "cite": "Cao et al., 2025",
+    "authors": "Cao C., Arora R., Cento P., et al. (36 authors)",
+    "year": 2025,
+    "title": "Automation of Systematic Reviews with Large Language Models",
+    "venue": "medRxiv (preprint)",
+    "details": "doi:10.1101/2025.06.13.25329541",
+    "url": "https://doi.org/10.1101/2025.06.13.25329541",
+    "verified": "2026-09-27 via Crossref"
+  },
+  {
+    "id": "kanoulas-2017",
+    "cite": "Kanoulas et al., 2017",
+    "authors": "Kanoulas E., Li D., Azzopardi L., Spijker R.",
+    "year": 2017,
+    "title": "CLEF 2017 Technologically Assisted Reviews in Empirical Medicine Overview",
+    "venue": "Working Notes of CLEF 2017, CEUR Workshop Proceedings",
+    "details": "Vol. 1866",
+    "url": "https://ceur-ws.org/Vol-1866/invited_paper_12.pdf",
+    "verified": "2026-09-27 via CEUR-WS index"
+  },
+  {
+    "id": "kanoulas-2018",
+    "cite": "Kanoulas et al., 2018",
+    "authors": "Kanoulas E., Li D., Azzopardi L., Spijker R.",
+    "year": 2018,
+    "title": "CLEF 2018 Technologically Assisted Reviews in Empirical Medicine Overview",
+    "venue": "Working Notes of CLEF 2018, CEUR Workshop Proceedings",
+    "details": "Vol. 2125",
+    "url": "https://ceur-ws.org/Vol-2125/invited_paper_6.pdf",
+    "verified": "2026-09-27 via CEUR-WS index"
+  },
+  {
+    "id": "kanoulas-2019",
+    "cite": "Kanoulas et al., 2019",
+    "authors": "Kanoulas E., Li D., Azzopardi L., Spijker R.",
+    "year": 2019,
+    "title": "CLEF 2019 Technology Assisted Reviews in Empirical Medicine Overview",
+    "venue": "Working Notes of CLEF 2019, CEUR Workshop Proceedings",
+    "details": "Vol. 2380",
+    "url": "https://ceur-ws.org/Vol-2380/paper_250.pdf",
+    "verified": "2026-09-27 via CEUR-WS index"
+  },
+  {
+    "id": "norman-2019",
+    "cite": "Norman et al., 2019",
+    "authors": "Norman C. R., Leeflang M. M. G., Porcher R., Névéol A.",
+    "year": 2019,
+    "title": "Measuring the impact of screening automation on meta-analyses of diagnostic test accuracy",
+    "venue": "Systematic Reviews",
+    "details": "8, 243. doi:10.1186/s13643-019-1162-x",
+    "url": "https://doi.org/10.1186/s13643-019-1162-x",
+    "verified": "2026-09-27 via Crossref and BMC"
+  },
+  {
+    "id": "kusa-2023",
+    "cite": "Kusa et al., 2023",
+    "authors": "Kusa W., Zuccon G., Knoth P., Hanbury A.",
+    "year": 2023,
+    "title": "Outcome-based Evaluation of Systematic Review Automation",
+    "venue": "Proceedings of ICTIR 2023, ACM",
+    "details": "pp. 125–133. doi:10.1145/3578337.3605135",
+    "url": "https://doi.org/10.1145/3578337.3605135",
+    "verified": "2026-09-27 via Crossref"
+  },
+  {
+    "id": "soudani-2025",
+    "cite": "Soudani et al., 2025",
+    "authors": "Soudani H., Kanoulas E., Hasibi F.",
+    "year": 2025,
+    "title": "Why Uncertainty Estimation Methods Fall Short in RAG: An Axiomatic Analysis",
+    "venue": "Findings of the Association for Computational Linguistics: ACL 2025",
+    "details": "pp. 16596–16616. doi:10.18653/v1/2025.findings-acl.852",
+    "url": "https://aclanthology.org/2025.findings-acl.852/",
+    "verified": "2026-09-27 via ACL Anthology and Crossref"
+  },
+  {
+    "id": "yang-2021",
+    "cite": "Yang et al., 2021",
+    "authors": "Yang E., Lewis D. D., Frieder O.",
+    "year": 2021,
+    "title": "On Minimizing Cost in Legal Document Review Workflows",
+    "venue": "Proceedings of DocEng 2021, ACM",
+    "details": "doi:10.1145/3469096.3469872; preprint arXiv:2106.09866",
+    "url": "https://doi.org/10.1145/3469096.3469872",
+    "verified": "2026-09-27 via arXiv and Crossref"
+  },
+  {
+    "id": "cormack-2014",
+    "cite": "Cormack and Grossman, 2014",
+    "authors": "Cormack G. V., Grossman M. R.",
+    "year": 2014,
+    "title": "Evaluation of machine-learning protocols for technology-assisted review in electronic discovery",
+    "venue": "Proceedings of SIGIR 2014, ACM",
+    "details": "pp. 153–162. doi:10.1145/2600428.2609601",
+    "url": "https://doi.org/10.1145/2600428.2609601",
+    "verified": "2026-09-27 via Crossref"
+  },
+  {
+    "id": "cochrane-handbook",
+    "cite": "Higgins et al., 2024",
+    "authors": "Higgins J. P. T., Thomas J., Chandler J., Cumpston M., Li T., Page M. J., et al. (editors)",
+    "year": 2024,
+    "title": "Cochrane Handbook for Systematic Reviews of Interventions, version 6.5 (updated August 2024)",
+    "venue": "Cochrane",
+    "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current",
+    "verified": "2026-09-27 via cochrane.org"
+  }
+]

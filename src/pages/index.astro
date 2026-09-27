@@ -1,0 +1,7 @@
+---
+import EditionPage from '../components/EditionPage.astro';
+import { getCurrentEdition } from '../lib/editions';
+
+const edition = await getCurrentEdition();
+---
+<EditionPage edition={edition} canonicalPath="/" />

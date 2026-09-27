@@ -1,0 +1,215 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: var(--space-5);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--text-body);
+  line-height: var(--leading);
+  font-optical-sizing: auto;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---- Headings ---------------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--text-h1);
+  font-weight: 620;
+  letter-spacing: -0.018em;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  margin-block: var(--space-8) var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+
+h3 {
+  font-size: var(--text-h3);
+  margin-block: var(--space-6) var(--space-2);
+}
+
+p,
+ul,
+ol,
+dl,
+blockquote {
+  margin-block: 0 var(--space-4);
+}
+
+p,
+li,
+dd {
+  max-width: var(--measure);
+  text-wrap: pretty;
+  hanging-punctuation: first;
+}
+
+strong {
+  font-weight: 650;
+}
+
+/* ---- Links and focus --------------------------------------------------- */
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--muted);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-color: var(--pooled);
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* ---- Utilities --------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  z-index: 10;
+  padding: var(--space-2) var(--space-4);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: var(--text-small);
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+.sans {
+  font-family: var(--sans);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Primary action: the only ochre fill on the site outside the figure. */
+.button {
+  display: inline-block;
+  padding: 0.7em 1.15em 0.65em;
+  background: var(--pooled);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--text-small);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid var(--pooled);
+  border-radius: var(--radius);
+}
+
+.button:hover {
+  background: var(--pooled-hover);
+  border-color: var(--pooled-hover);
+  color: var(--ink);
+}
+
+/* Lead paragraph in italics, like an abstract's first line */
+.lede {
+  font-size: 1.2em;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 34em;
+}
+
+/* Author–year citations */
+a[href^='#ref-'] {
+  text-decoration-style: dotted;
+  white-space: nowrap;
+}
+
+/* ---- Placeholders (CLAUDE.md §7) --------------------------------------- */
+
+.ph {
+  font-style: normal;
+}
+
+.ph[data-dev] {
+  outline: 2px dashed var(--pooled-text);
+  outline-offset: 2px;
+  background: #fff7e6;
+}
+
+.ph[data-dev]::after {
+  content: attr(data-key);
+  display: inline-block;
+  margin-left: 0.4em;
+  padding: 0 4px;
+  vertical-align: 0.15em;
+  background: var(--pooled-text);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  pointer-events: none;
+}

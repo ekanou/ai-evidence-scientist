@@ -1,0 +1,58 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  area: CollectionEntry<'researchAreas'>;
+}
+const { area } = Astro.props;
+const { Content } = await render(area);
+const id = `area-${area.data.order}`;
+---
+<li class="area" aria-labelledby={id}>
+  <h3 id={id}>{area.data.title}</h3>
+  <div class="area-body"><Content /></div>
+</li>
+
+<style>
+  .area {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    column-gap: var(--space-3);
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--rule);
+    counter-increment: area;
+    max-width: none;
+  }
+
+  .area:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .area::before {
+    content: counter(area);
+    grid-row: 1 / span 2;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums lining-nums;
+    color: var(--study);
+    padding-top: 0.2rem;
+  }
+
+  h3 {
+    margin: 0 0 var(--space-1);
+    font-size: 1.1em;
+  }
+
+  .area-body :global(p) {
+    margin: 0;
+  }
+
+  @media (min-width: 64rem) {
+    .area {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      margin-left: -3.75rem;
+    }
+  }
+</style>

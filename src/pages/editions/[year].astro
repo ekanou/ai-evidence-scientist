@@ -1,0 +1,16 @@
+---
+import type { GetStaticPaths } from 'astro';
+import EditionPage from '../../components/EditionPage.astro';
+import { getEditions } from '../../lib/editions';
+import { YEAR } from '../../config';
+
+export const getStaticPaths = (async () => {
+  const editions = await getEditions();
+  return editions.map((edition) => ({ params: { year: String(edition.data.year) }, props: { edition } }));
+}) satisfies GetStaticPaths;
+
+const { edition } = Astro.props;
+// The current edition also lives at "/"; point search engines there.
+const canonicalPath = edition.data.year === YEAR ? '/' : undefined;
+---
+<EditionPage edition={edition} canonicalPath={canonicalPath} />

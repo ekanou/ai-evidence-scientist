@@ -1,0 +1,199 @@
+---
+/** One edition's call: hero, premise, research areas, outputs, TREC, references, apply. */
+import { render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ForestPlotHero from './ForestPlotHero.astro';
+import ResearchArea from './ResearchArea.astro';
+import References from './References.astro';
+import ApplyBox from './ApplyBox.astro';
+import Ph from './Ph.astro';
+import { WORKSHOP_NAME, YEAR, TREC_TRACK_ACCEPTED } from '../config';
+import { getResearchAreas } from '../lib/editions';
+import { href } from '../lib/url';
+
+interface Props {
+  edition: CollectionEntry<'editions'>;
+  canonicalPath?: string;
+}
+const { edition, canonicalPath } = Astro.props;
+const d = edition.data;
+const isCurrent = d.year === YEAR;
+const { Content } = await render(edition);
+const areas = await getResearchAreas(d.year);
+
+const toc = [
+  { id: 'premise', label: 'Premise' },
+  ...(areas.length ? [{ id: 'research-areas', label: 'Research areas' }] : []),
+  ...(d.outputs.length ? [{ id: 'outputs', label: 'Outputs' }] : []),
+  ...(d.trec ? [{ id: 'trec', label: 'Relationship to TREC' }] : []),
+  ...(d.references.length ? [{ id: 'references', label: 'References' }] : []),
+  ...(isCurrent ? [{ id: 'apply', label: 'Apply' }] : []),
+];
+
+// Guard the writing rule: the TREC track stays "proposed" until confirmed.
+if (d.trec && !TREC_TRACK_ACCEPTED && !/\bproposed\b/i.test(d.trec)) {
+  throw new Error(`Edition ${d.year}: the TREC paragraph must say "proposed" until TREC_TRACK_ACCEPTED is true.`);
+}
+---
+<BaseLayout
+  title={`${WORKSHOP_NAME} ${d.year}: ${d.title}`}
+  description={d.description}
+  activeYear={d.year}
+  toc={toc}
+  canonicalPath={canonicalPath}
+>
+  <header class="hero">
+    <h1>
+      <span class="h1-edition">{WORKSHOP_NAME} {d.year}:</span>
+      <span class="h1-title">{d.title}</span>
+    </h1>
+    <p class="lede">{d.lede}</p>
+
+    <dl class="facts">
+      <div>
+        <dt>Dates</dt>
+        <dd>{d.dates ?? (isCurrent ? <Ph k="DATES" /> : 'Not recorded')}</dd>
+      </div>
+      <div>
+        <dt>Location</dt>
+        <dd>{d.location ?? (isCurrent ? <Ph k="LOCATION" /> : 'Not recorded')}</dd>
+      </div>
+      <div>
+        <dt>Format</dt>
+        <dd>{d.format}</dd>
+      </div>
+    </dl>
+
+    {isCurrent && (
+      <p class="hero-actions">
+        <a class="button" href={href('/apply')}>How to apply</a>
+        <a class="sans" href={href('/data-and-evaluation')}>Read the task and evaluation design</a>
+      </p>
+    )}
+
+    {d.heroFigure === 'forest-plot' && <ForestPlotHero />}
+  </header>
+
+  <section aria-labelledby="premise">
+    <h2 id="premise">Premise</h2>
+    <div class="essay"><Content /></div>
+  </section>
+
+  {areas.length > 0 && (
+    <section aria-labelledby="research-areas">
+      <h2 id="research-areas">Research areas</h2>
+      <ol class="areas">
+        {areas.map((a) => <ResearchArea area={a} />)}
+      </ol>
+    </section>
+  )}
+
+  {d.outputs.length > 0 && (
+    <section aria-labelledby="outputs">
+      <h2 id="outputs">Outputs</h2>
+      <ul class="outputs">
+        {d.outputs.map((o) => <li>{o}</li>)}
+      </ul>
+      {d.outputsNote && <p>{d.outputsNote}</p>}
+    </section>
+  )}
+
+  {d.trec && (
+    <section aria-labelledby="trec">
+      <h2 id="trec">Relationship to TREC</h2>
+      <p>{d.trec}</p>
+    </section>
+  )}
+
+  {d.references.length > 0 && (
+    <section aria-labelledby="references">
+      <h2 id="references">References</h2>
+      <References ids={d.references} />
+    </section>
+  )}
+
+  {isCurrent && <ApplyBox />}
+</BaseLayout>
+
+<style>
+  .hero h1 {
+    max-width: 22ch;
+  }
+
+  .h1-edition {
+    display: block;
+    font-size: 0.5em;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-bottom: 0.45em;
+    color: var(--ink);
+  }
+
+  .h1-title {
+    display: block;
+  }
+
+  .lede {
+    margin-top: var(--space-5);
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--space-3) var(--space-5);
+    margin: var(--space-5) 0 0;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--rule);
+    max-width: var(--figure-max);
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    line-height: 1.4;
+  }
+
+  .facts dt {
+    font-size: var(--text-xsmall);
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.15rem;
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+    margin: var(--space-5) 0 0;
+  }
+
+  .hero-actions .sans {
+    font-size: var(--text-small);
+  }
+
+  .essay :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .areas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: area;
+  }
+
+  .outputs {
+    padding-left: 1.2em;
+  }
+
+  .outputs li {
+    padding-left: 0.2em;
+    margin-bottom: var(--space-1);
+  }
+
+  .outputs li::marker {
+    color: var(--study);
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+/** Year archive, like a proceedings sidebar. Quiet by design. */
+import { getEditions } from '../lib/editions';
+import { YEAR } from '../config';
+import { href } from '../lib/url';
+
+interface Props {
+  /** Year of the edition being viewed, if any. */
+  activeYear?: number;
+  headingId?: string;
+}
+const { activeYear, headingId = 'editions-heading' } = Astro.props;
+const editions = await getEditions();
+---
+<nav class="edition-nav" aria-labelledby={headingId}>
+  <h2 class="side-heading" id={headingId}>Editions</h2>
+  <ul>
+    {editions.map((e) => {
+      const isCurrentEdition = e.data.year === YEAR;
+      const url = isCurrentEdition ? href('/') : href(`/editions/${e.data.year}/`);
+      const active = e.data.year === activeYear;
+      return (
+        <li>
+          <a href={url} aria-current={active ? 'page' : undefined} class:list={{ active }}>
+            {e.data.year}
+            {isCurrentEdition && <span class="muted"> (current call)</span>}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

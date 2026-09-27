@@ -1,0 +1,413 @@
+---
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '@fontsource-variable/source-serif-4/opsz-italic.css';
+import '@fontsource-variable/public-sans/wght.css';
+import '../styles/global.css';
+import serifLatin from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-opsz-normal.woff2?url';
+
+import Mark from '../components/Mark.astro';
+import EditionNav from '../components/EditionNav.astro';
+import Ph from '../components/Ph.astro';
+import { WORKSHOP_NAME, SITE_DESCRIPTION, PROJECT_LEAD } from '../config';
+import { href, stripBase } from '../lib/url';
+
+export interface TocItem {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  /** Page title; the workshop name is appended unless it is already included. */
+  title: string;
+  description?: string;
+  /** Year of the edition this page belongs to (highlights it in the archive). */
+  activeYear?: number;
+  toc?: TocItem[];
+  /** Canonical path override (e.g. the current edition's archive page points to "/"). */
+  canonicalPath?: string;
+}
+
+const { title, description = SITE_DESCRIPTION, activeYear, toc = [], canonicalPath } = Astro.props;
+const fullTitle = title.includes(WORKSHOP_NAME) ? title : `${title} | ${WORKSHOP_NAME}`;
+const current = stripBase(Astro.url.pathname);
+const canonical = Astro.site ? new URL(href(canonicalPath ?? current), Astro.site).href : undefined;
+
+const pages = [
+  { path: '/', label: 'Call' },
+  { path: '/data-and-evaluation', label: 'Data & evaluation' },
+  { path: '/people', label: 'People' },
+  { path: '/apply', label: 'Apply' },
+  { path: '/faq', label: 'FAQ' },
+];
+const isCurrent = (path: string) => current === path;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href={href('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preload" href={serifLatin} as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="wordmark" href={href('/')}>
+          <Mark />
+          <span>{WORKSHOP_NAME}</span>
+        </a>
+
+        <nav class="primary-nav" aria-label="Main">
+          <ul>
+            {pages.map((p) => (
+              <li>
+                <a href={href(p.path)} aria-current={isCurrent(p.path) ? 'page' : undefined}>{p.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <details class="mobile-menu">
+          <summary>Menu</summary>
+          <div class="mobile-menu-panel">
+            <nav aria-label="Main (mobile)">
+              <ul>
+                {pages.map((p) => (
+                  <li>
+                    <a href={href(p.path)} aria-current={isCurrent(p.path) ? 'page' : undefined}>{p.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <EditionNav activeYear={activeYear} headingId="editions-heading-mobile" />
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <div class="shell page">
+
+      <main id="main" tabindex="-1">
+        <slot />
+      </main>
+
+      <aside class="sidebar">
+        <div class="sidebar-inner">
+          <EditionNav activeYear={activeYear} />
+          {toc.length > 0 && (
+            <nav class="toc" aria-labelledby="toc-heading">
+              <h2 class="side-heading" id="toc-heading">On this page</h2>
+              <ul>
+                {toc.map((t) => (
+                  <li><a href={`#${t.id}`}>{t.label}</a></li>
+                ))}
+              </ul>
+            </nav>
+          )}
+        </div>
+      </aside>
+    </div>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p>
+          <strong>{WORKSHOP_NAME}</strong>. Host institution: <Ph k="HOST_INSTITUTION" />.
+          Project lead: {PROJECT_LEAD.name}, {PROJECT_LEAD.affiliation}
+          (<a href={`mailto:${PROJECT_LEAD.email}`}>{PROJECT_LEAD.email}</a>).
+        </p>
+        <p class="muted">
+          Figure 1 uses illustrative numbers, not data from real studies.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .shell {
+    width: 100%;
+    max-width: 74rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* ---- Header ---- */
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 4rem;
+    position: relative;
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--serif);
+    font-weight: 620;
+    font-size: 1rem;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    color: var(--ink);
+    padding-block: var(--space-2);
+  }
+
+  .primary-nav {
+    display: none;
+  }
+
+  .primary-nav ul,
+  .mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .primary-nav ul {
+    display: flex;
+    gap: var(--space-5);
+  }
+
+  .primary-nav a,
+  .mobile-menu a {
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    color: var(--muted);
+    text-decoration: none;
+    padding-block: var(--space-2);
+  }
+
+  .primary-nav a:hover,
+  .mobile-menu a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--pooled);
+    text-decoration-thickness: 2px;
+  }
+
+  .primary-nav a[aria-current='page'] {
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 var(--ink);
+  }
+
+  /* Mobile disclosure menu (no JS) */
+  .mobile-menu summary {
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-menu summary::after {
+    content: '';
+    width: 0.45em;
+    height: 0.45em;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-25%) rotate(45deg);
+  }
+
+  .mobile-menu[open] summary::after {
+    transform: translateY(20%) rotate(-135deg);
+  }
+
+  .mobile-menu-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 5;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: var(--space-3) var(--gutter) var(--space-5);
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .mobile-menu-panel li a {
+    display: block;
+    padding-block: 0.6rem;
+    font-size: 1rem;
+  }
+
+  .mobile-menu a[aria-current='page'] {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ---- Page grid ---- */
+  .page {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  main {
+    padding-block: var(--space-6) var(--space-8);
+    min-width: 0;
+  }
+
+  main:focus {
+    outline: none;
+  }
+
+  @media (min-width: 30rem) {
+    .wordmark {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .primary-nav {
+      display: block;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .page {
+      grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      column-gap: var(--space-8);
+    }
+
+    .sidebar {
+      display: block;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    main {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .sidebar-inner {
+      position: sticky;
+      top: 0;
+      padding-top: calc(var(--space-6) + 0.6rem);
+      display: grid;
+      gap: var(--space-6);
+    }
+
+    main {
+      padding-top: var(--space-7);
+    }
+  }
+
+  /* ---- Footer ---- */
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    line-height: 1.55;
+  }
+
+  .footer-inner {
+    padding-block: var(--space-6) var(--space-7);
+  }
+
+  .footer-inner p {
+    max-width: 60ch;
+  }
+
+  /* ---- Sidebar lists (shared with EditionNav, TOC) ---- */
+  :global(.side-heading) {
+    font-family: var(--sans);
+    font-size: var(--text-xsmall);
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+    margin: 0 0 var(--space-2);
+    padding: 0;
+    border: 0;
+  }
+
+  .sidebar :global(ul) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar :global(a) {
+    display: block;
+    font-family: var(--sans);
+    font-size: var(--text-small);
+    line-height: 1.35;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.3rem 0 0.3rem 0.75rem;
+    border-left: 2px solid var(--rule);
+  }
+
+  .sidebar :global(a:hover) {
+    color: var(--ink);
+    border-left-color: var(--ink);
+  }
+
+  .sidebar :global(a[aria-current='page']) {
+    color: var(--ink);
+    font-weight: 600;
+    border-left-color: var(--study);
+  }
+
+  .mobile-menu :global(.edition-nav) {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--rule);
+  }
+
+  .mobile-menu :global(.edition-nav ul) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
+  }
+
+  .mobile-menu :global(.edition-nav a) {
+    display: block;
+    padding-block: 0.6rem;
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .mobile-menu :global(.edition-nav a[aria-current='page']) {
+    color: var(--ink);
+    font-weight: 600;
+  }
+</style>
