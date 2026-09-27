@@ -7,19 +7,20 @@ This file briefs Claude Code on the project. Read it fully before writing code. 
 - 2026-09-27: The host is the UvA. The call is for MSc AI students who want to do Project AI or a thesis, and it pays a light remuneration as an internship.
 - 2026-09-27: The organisers are Jingfen Qiao, Roxana Petcu and Gabriella Poerwawinata, all PhD students at UvA IRLab.
 - 2026-09-27: There is no deadline; applications are rolling. Applications go to e.kanoulas@uva.nl and j.qiao@uva.nl (Jingfen Qiao).
+- 2026-09-27: The location is Lab42, Science Park Amsterdam. There are no fixed dates: it is a running project that participants can start at any time, not a summer workshop.
 - 2026-09-27: The projects page stays public. `SHOW_PROJECTS` in `src/config.ts` can hide it (and every link to it) if needed.
 - 2026-09-27: Students do not choose projects when they apply. The projects page shows the kinds of work on offer, and the application note does not ask for project preferences.
 - 2026-09-27: The duration is at least eight weeks, because Project AI lasts two months. This replaces "ten weeks". The research areas are broken down into student projects (a `/projects` page, with content in `src/content/projects/<year>/`), each sized for eight weeks and extendable to a thesis.
 
 ## 1. What we are building
 
-A small, static website for an in-person summer research workshop on **agentic AI for medical systematic reviews**, hosted by the University of Amsterdam. Participants are MSc AI students doing their Project AI or MSc thesis, appointed as interns with a light remuneration. The format is modelled on the Johns Hopkins HLTCOE SCALE workshops (see pages for SCALE 2025, 2026 and 2027 at https://hltcoe.jhu.edu/research/scale/). Each SCALE edition has one page per year: a title, dates, a motivating essay, a list of research areas, references, and an application call. Our site follows that information architecture, with a better design and one interactive element.
+A small, static website for an ongoing, in-person research project on **agentic AI for medical systematic reviews**, hosted by the University of Amsterdam at Lab42, Science Park Amsterdam. It was originally briefed as a summer workshop; the owner changed this to a running project that participants can start at any time. Participants are MSc AI students doing their Project AI or MSc thesis, appointed as interns with a light remuneration. The format is modelled on the Johns Hopkins HLTCOE SCALE workshops (see pages for SCALE 2025, 2026 and 2027 at https://hltcoe.jhu.edu/research/scale/). Each SCALE edition has one page per year: a title, dates, a motivating essay, a list of research areas, references, and an application call. Our site follows that information architecture, with a better design and one interactive element.
 
 **Important:** we are not SCALE and not JHU. Do not use the SCALE name, JHU/HLTCOE logos, or their wording. Structure is borrowed; content and brand are ours.
 
 - Working name: `{{WORKSHOP_NAME}}` — use "The AI Evidence Scientist" until the owner confirms a name. Keep the name in one config value so it can be changed in one place.
 - Edition: `{{YEAR}}` (default 2027).
-- Host institution: University of Amsterdam (UvA), confirmed by the owner on 2026-09-27. Applications go to e.kanoulas@uva.nl and j.qiao@uva.nl. There is no deadline (rolling). Location and dates are placeholders (see §7).
+- Host institution: University of Amsterdam (UvA), confirmed by the owner on 2026-09-27. Applications go to e.kanoulas@uva.nl and j.qiao@uva.nl. There is no deadline (rolling). Location: Lab42, Science Park Amsterdam. Participants can start at any time.
 - Project lead: Evangelos Kanoulas, University of Amsterdam, IRLab (e.kanoulas@uva.nl). Confirm before publishing any other names.
 
 ### Audience and the site's primary job
@@ -80,7 +81,7 @@ Use this copy as written; light edits for flow are fine. Do not add claims or st
 ### Hero
 **{{WORKSHOP_NAME}} {{YEAR}}: Living Systematic Reviews as a Testbed for Agentic Research**
 
-{{DATES}} · {{LOCATION}} · In-person internship of at least eight weeks, light remuneration
+Start: any time · {{LOCATION}} · In-person internship of at least eight weeks, light remuneration
 
 Lede: *Can an AI agent carry out a medical systematic review — and how would we know if it got the conclusion wrong?*
 

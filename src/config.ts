@@ -29,8 +29,8 @@ const p = <T = string>(
 export const placeholders = {
   WORKSHOP_NAME: p('The AI Evidence Scientist', false, 'The AI Evidence Scientist', 'Working name; confirm the final name.'),
   YEAR: p<number>(2027, false, '2027', 'Edition year.'),
-  DATES: p(null, false, 'Dates to be announced', 'Workshop dates, e.g. "8 June – 14 August 2027".'),
-  LOCATION: p('University of Amsterdam, Amsterdam', false, 'Location to be announced', 'Inferred from the host; confirm the building or venue.'),
+  DATES: p('Any time; the project is ongoing', true, 'Dates to be announced', 'When participants can start (owner: any time, running project).'),
+  LOCATION: p('Lab42, Science Park Amsterdam', true, 'Location to be announced', 'Building and campus.'),
   HOST_INSTITUTION: p('University of Amsterdam', true, 'Host institution to be announced', 'Host institution name.'),
   CONTACT_EMAIL: p<string[]>(
     ['e.kanoulas@uva.nl', 'j.qiao@uva.nl'],
@@ -99,7 +99,7 @@ export const PROJECT_LEAD = {
 };
 
 export const SITE_DESCRIPTION =
-  'An in-person summer research workshop at the University of Amsterdam on agentic AI for medical systematic reviews, for MSc AI students doing Project AI or their thesis.';
+  'An ongoing, in-person research project at Lab42, University of Amsterdam, on agentic AI for medical systematic reviews, for MSc AI students doing Project AI or their thesis.';
 
 /**
  * Whether the student projects are public. When false, /projects/ is not built and

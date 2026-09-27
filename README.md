@@ -1,6 +1,6 @@
 # The AI Evidence Scientist: workshop site
 
-A static Astro site for the summer workshop on agentic AI for medical systematic reviews.
+A static Astro site for the ongoing research project on agentic AI for medical systematic reviews at Lab42, University of Amsterdam.
 The brief is in `CLAUDE.md` and the design plan and deviations are in `DESIGN.md`.
 
 ## Commands
