@@ -1,6 +1,6 @@
 ---
 edition: 2027
-order: 8
+order: 6
 title: Eligibility decisions with evidence
 stage: screening
 areas: [3]

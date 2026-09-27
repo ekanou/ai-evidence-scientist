@@ -1,6 +1,6 @@
 ---
 edition: 2027
-order: 13
+order: 11
 title: Leakage and the zero-shot baseline
 stage: evaluation
 areas: [5]

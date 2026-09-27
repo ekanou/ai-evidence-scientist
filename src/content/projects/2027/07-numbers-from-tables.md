@@ -1,6 +1,6 @@
 ---
 edition: 2027
-order: 9
+order: 7
 title: Numbers from tables and figures
 stage: screening
 areas: [3]

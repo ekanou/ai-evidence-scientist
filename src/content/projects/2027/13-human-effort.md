@@ -1,6 +1,6 @@
 ---
 edition: 2027
-order: 15
+order: 13
 title: Spending human effort well
 stage: systems
 areas: [7]

@@ -1,6 +1,6 @@
 ---
 edition: 2027
-order: 10
+order: 8
 title: Risk of bias and reviewer disagreement
 stage: screening
 areas: [3]

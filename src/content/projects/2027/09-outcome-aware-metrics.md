@@ -1,6 +1,6 @@
 ---
 edition: 2027
-order: 11
+order: 9
 title: Outcome-aware evaluation metrics
 stage: evaluation
 areas: [4]

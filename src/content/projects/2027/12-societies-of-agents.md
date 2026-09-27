@@ -1,6 +1,6 @@
 ---
 edition: 2027
-order: 14
+order: 12
 title: Societies of agents
 stage: systems
 areas: [6]

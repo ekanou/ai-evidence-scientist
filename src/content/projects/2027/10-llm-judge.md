@@ -1,6 +1,6 @@
 ---
 edition: 2027
-order: 12
+order: 10
 title: Validating an LLM judge
 stage: evaluation
 areas: [4]
