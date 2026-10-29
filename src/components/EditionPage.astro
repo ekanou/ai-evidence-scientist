@@ -8,7 +8,7 @@ import References from './References.astro';
 import ApplyBox from './ApplyBox.astro';
 import Ph from './Ph.astro';
 import { WORKSHOP_NAME, YEAR, TREC_TRACK_ACCEPTED, SHOW_PROJECTS } from '../config';
-import { getResearchAreas, getProjects } from '../lib/editions';
+import { getResearchAreas, getProjects, countWord } from '../lib/editions';
 import { href } from '../lib/url';
 
 interface Props {
@@ -90,8 +90,8 @@ if (d.trec && !TREC_TRACK_ACCEPTED && !/\bproposed\b/i.test(d.trec)) {
       </ol>
       {projects.length > 0 && (
         <p class="projects-note">
-          The areas break down into {projects.length} student projects. Each one fits the eight weeks of Project
-          AI and can grow into an MSc thesis. <a href={href('/projects')}>See all projects</a>.
+          There are currently {countWord(projects.length)} student projects, each of which can be taken as Project AI or as
+          an MSc thesis. <a href={href('/projects')}>See the projects</a>.
         </p>
       )}
     </section>

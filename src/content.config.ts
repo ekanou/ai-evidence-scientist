@@ -56,7 +56,7 @@ const projects = defineCollection({
     areas: z.array(z.number().int()).min(1),
     /** The one-sentence research question. */
     question: z.string(),
-    background: z.string(),
+    background: z.string().optional(),
   }),
 });
 

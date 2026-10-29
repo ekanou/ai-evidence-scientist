@@ -34,6 +34,11 @@ export async function getProjects(year: number) {
   return projects.sort((a, b) => a.data.order - b.data.order);
 }
 
+/** Small counts as words, for running text ("four projects"). */
+export function countWord(n: number): string {
+  return ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'][n] ?? String(n);
+}
+
 /** Anchor id for a project, derived from its title (used for cross-links in Markdown). */
 export function projectSlug(title: string): string {
   return title

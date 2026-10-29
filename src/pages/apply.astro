@@ -7,6 +7,7 @@ import { href } from '../lib/url';
 const toc = [
   { id: 'who', label: 'Who should apply' },
   { id: 'funding', label: 'Remuneration' },
+  { id: 'how-we-work', label: 'How we work' },
   { id: 'how', label: 'How to apply' },
   { id: 'decisions', label: 'Decisions' },
 ];
@@ -38,9 +39,9 @@ const toc = [
     </p>
     {SHOW_PROJECTS ? (
       <p>
-        You do not choose a project when you apply. The <a href={href('/projects')}>projects</a> show the kinds
-        of work on offer: each one fits the eight weeks of Project AI and describes how it extends into a
-        thesis. The research areas behind them are
+        You do not choose a project when you apply. The current <a href={href('/projects')}>projects</a> show
+        the kinds of work on offer; each can be taken as Project AI or as an MSc thesis. The research areas
+        behind them are
         in <a href={`${href('/')}#research-areas`}>the call</a>, and the task and scoring design is on
         the <a href={href('/data-and-evaluation')}>data and evaluation</a> page.
       </p>
@@ -56,6 +57,14 @@ const toc = [
   <section aria-labelledby="funding">
     <h2 id="funding">Remuneration</h2>
     <p><Ph k="FUNDING_DETAILS" /></p>
+  </section>
+
+  <section aria-labelledby="how-we-work">
+    <h2 id="how-we-work">How we work</h2>
+    <p>
+      The work is in person at <Ph k="LOCATION" />. Everyone involved plans to meet as a group every Tuesday and
+      Friday morning.
+    </p>
   </section>
 
   <section aria-labelledby="how">
